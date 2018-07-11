@@ -1,0 +1,50 @@
+.user_profile{
+    h1 {
+        margin: 0 0 5px;
+        b {
+            display: block;
+            font-size: .45em;
+            line-height: 1em;
+        }
+    }
+    >a {
+        font-weight: 500;
+        font-size: .8em;
+        color: darken($controls_color, 5%);
+        display: block;
+    }
+    button {
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        display: block;
+        float: right;
+        margin: 0;
+        min-width: 150px;
+    }
+    h2 {
+        clear: both;
+        margin: $default_padding*3 0 $default_padding;
+    }
+    .user_profile_image {
+        background: transparentize($controls_color, .9); 
+        @include rectangle($img_size*2);
+        border-radius: 10%;
+        float: left;
+        border: 3px solid $border_color;
+        margin: 0 10px 0 0;
+    }
+
+    .list {
+        clear: both;
+        h2 {
+            margin: 0 0 10px;
+        }
+    }
+
+    .tabs {
+        max-width: 500px;
+        margin: $default_padding auto;
+        .tab {
+            width: 33.3%;
+        }
+    }
+}

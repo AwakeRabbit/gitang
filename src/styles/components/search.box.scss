@@ -1,0 +1,31 @@
+.search_box {
+    position: relative;
+    width: 100%;
+    height: $default_padding * 2.5;
+    input {
+        display: block;
+        position: absolute;
+        margin-right: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding-right: 120px;
+        box-shadow: 0 2px 20px darken($app_color,2%);
+    }
+    button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        float: right;
+        width: 100px;
+        text-align: center;
+        padding: $default_padding - 15px;
+        position: relative;
+        height: 47px;
+    }
+
+    .search_box_count {
+        padding: 50px $default_padding 0;
+        color: lighten($font_color, 40%);
+        font-size: .8em;
+    }
+}

@@ -1,0 +1,18 @@
+@import './user.info';
+@import './menu';
+
+header {
+    @include clearfix;
+    padding: $default_padding/1.5 $default_padding;
+    background: #fff;   
+    border-radius: 3px 3px 0 0;
+
+    .logo {
+        float: right;
+        height: $img_size;
+        width: auto;
+        position: relative;
+        top: -$default_padding/2.5;
+        margin-bottom: -$default_padding;
+    }
+}

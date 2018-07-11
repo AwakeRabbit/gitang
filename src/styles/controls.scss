@@ -1,0 +1,222 @@
+button, .button {
+    display: inline-block;
+    border: none;
+    border-radius: $default_padding;
+    background: $controls_color;
+    padding: $default_padding - 15px $default_padding;
+    font-size: $font_size;
+    line-height: 1em;
+    margin: 0;
+    transition: all .1s linear;
+    box-sizing: border-box;
+    color: #fff;
+    outline: none;
+    vertical-align: middle;
+    cursor: pointer;    
+    user-select: none;
+
+    &.loading {
+        position: relative;
+        color: transparentize($color: #fff, $amount: .7);
+        outline-style: none;
+        &:before,&:after {
+            content: '';
+            top: 50%;
+            left: 50%;
+            margin: -10px;
+            display: block;
+            background: rgba(255,255,255,.5);
+            @include rectangle(20px);
+            position: absolute;
+            border-radius: 50%;
+            transform-origin: center;
+            animation: scaleLoading 2s ease-in infinite;
+            animation-delay: 0s;
+        }
+        &:after {
+            animation-delay: 1s;
+        }
+    }
+
+    &:active {
+        color: transparentize($color: #fff, $amount: .7);
+        background: darken($color: $controls_color, $amount: 5%);
+        font-size: .9em;
+    }
+
+    &.white {
+        background: #fff;
+        color: $font_color;
+        font-weight: 500;
+        &.loading {
+            &:before, &:after {
+                background: rgba(155,155,155,.5);
+            }
+        }
+    }
+}
+
+input, textarea {
+    display: inline-block;
+    border: none;
+    border-radius: $default_padding;
+    background: #ffffff;
+    box-sizing: border-box;
+    padding: $default_padding - 16px $default_padding;
+    line-height: 1em;
+    margin: 0;
+    font-size: $font_size;
+    outline: none;
+}
+
+@for $i from 1 through 5 {
+    h#{$i} {
+        font-weight: 200;
+        word-break: break-word;
+        font-size: #{(6-$i)/2.5}em;
+        margin: 0 0 $default_padding;
+    } 
+}
+
+#ui-blocker {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(0,0,0,.2);
+    @include rectangle(0);
+    top: 0;
+    left: 0; 
+    cursor: wait;
+    &.visible {
+        @include rectangle(100%);
+        animation: showBlocker .3s ease-in;
+    }
+    &.hiding {
+        animation: hideBlocker .3s ease-in;
+    }
+}
+
+
+#informer {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(255,255,255,.6);
+    box-shadow: 0 0 20px $app_color;
+    @include rectangle(0);
+    bottom: 10px;
+    left: 10px; 
+    padding: $default_padding/2;
+    cursor: default;
+    user-select: none;
+    padding: 0;
+    overflow: hidden;
+    font-size: .9em;
+    font-weight: 400;
+    border-radius: 4px;
+    color: lighten($color: $font_color, $amount: 10%);
+    &.visible {
+        @include rectangle(auto);
+        animation: showInformer .2s ease-in;
+        padding: $default_padding/3;
+    }
+    &.hiding {
+        animation: hideInformer 2s ease-in;
+    }
+}
+
+.fake_text {
+    width: 5em;
+    height: .8em;
+    border-radius: .4em;
+    background: transparentize($controls_color, .9); 
+    display: inline-block;
+}
+
+.tabs {
+    clear: both;
+    margin: $default_padding 0 $default_padding;
+    background: #fff;
+    border-radius: $default_padding;
+    box-shadow: 0 0 20px rgba(155,155,155,.3);
+    @include clearfix;
+    
+    .tab {
+        float: left;
+        padding: $default_padding/2;
+        cursor: pointer;
+        font-weight: 500;
+        color: lighten($color: $font_color, $amount: 40%);
+        @include transition;
+        box-sizing: border-box;
+        text-align: center;
+
+        &:hover, &.active {
+            background: darken($color: $app_color, $amount: 3%);
+            color: $font_color;
+        }
+
+        &:last-child {
+            border-radius: 0 $default_padding $default_padding 0;
+        }
+        &:first-child {
+            border-radius: $default_padding 0 0 $default_padding;
+            
+        }
+    }
+}
+
+@keyframes scaleLoading {
+    0% {
+        transform: scale(.1, .1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(5,5);
+        opacity: .2;
+    }
+}
+
+@keyframes showBlocker {
+    0% {
+        @include rectangle(100%);
+        opacity: 0;
+    }
+    100% {
+        @include rectangle(100%);        
+        opacity: 1;
+    }
+}
+
+@keyframes hideBlocker {
+    0% {
+        @include rectangle(100%);
+        opacity: 1;
+    }
+    100% {
+        @include rectangle(100%);        
+        opacity: 0;
+    }
+}
+
+@keyframes showInformer {
+    0% {
+        @include rectangle(auto);
+        opacity: 0;
+    }
+    100% {
+        @include rectangle(auto);        
+        opacity: 1;
+    }
+}
+
+@keyframes hideInformer {
+    0% {
+        @include rectangle(auto);
+        padding: $default_padding/3;
+        opacity: 1;
+    }
+    100% {
+        @include rectangle(auto);        
+        padding: $default_padding/3;
+        opacity: 0;
+    }
+}

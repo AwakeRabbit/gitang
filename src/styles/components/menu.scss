@@ -1,0 +1,25 @@
+menu {
+    display: block;
+    float: left;
+    list-style-type: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    border-radius: $default_padding;
+    margin: $default_padding/6 0 0;
+
+    a {
+        text-decoration: none; 
+        padding: 0 $default_padding/5 3px;
+        margin: 0 10px 0 0;
+        display: block;
+        float: left;
+        font-weight: 300;
+        font-size: 1.3em;
+        color: $font_color;
+
+        &.active,&:hover {
+            border-bottom: 2px solid lighten($font_color,50%);
+        }
+        
+    }
+}

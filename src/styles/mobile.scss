@@ -1,0 +1,88 @@
+@media all and (max-width: $max_site_width) {
+    #app {
+        margin: 0;
+    }
+}
+
+@media all and (max-width: 640px) {
+
+    #app {
+        section {
+            padding: $default_padding*3 $default_padding/2;
+        }
+    }
+
+    #app>div>header {
+        padding: $default_padding/1.5 $default_padding/2;
+        position: fixed;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 20;
+        top: 0;
+        left: 0;
+        box-shadow: 0 0 20px lighten($color: $font_color, $amount: 75%)
+    }
+
+    .list {
+        .item {
+            width: 48%;
+
+            &.user {
+                width: 31%;
+            }
+        }
+    }
+    .user_profile {
+        button {
+            @include clearfix;
+        }
+    }
+}
+
+@media all and (max-width: 540px) {
+    menu {
+        a {
+            font-size: 1em;
+        }
+    }
+    .user_info {
+        .profile_menu {
+            right: -10px;
+        }
+    }
+    .list {
+        .item {
+            width: 100%;
+
+            &.user {
+                width: 48%;
+            }
+        }
+    }
+    .tabs {
+        .tab {
+            font-size: .8em;
+        }
+    }
+}
+
+@media all and (max-width: 320px) {
+
+    .list {
+        .item {
+
+            &.user {
+                width: 100%;
+            }
+        }
+    }
+    .repo_info {
+        h1 {
+            font-size: 1.5em;
+            line-height: 1em;
+        }
+        .stars {
+            line-height: 1em;
+        }
+    }
+}

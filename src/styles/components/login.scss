@@ -1,0 +1,21 @@
+#login {
+    background: #fff;
+    max-width: 300px;
+    margin: auto;
+    padding: $default_padding;
+    box-sizing: border-box;
+    h1 {
+        text-align: center;
+    }
+    input {
+        display: block;
+        margin: $default_padding auto;
+        width: 100%;
+        box-shadow: 0 0 10px rgba(155,155,155,.2); 
+    }
+    button {
+        float: right;
+    }
+
+    @include clearfix;
+}

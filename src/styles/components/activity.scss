@@ -1,0 +1,17 @@
+.list.activity {
+    display: block;
+    @include clearfix;
+    .item {
+        float: left;
+        padding: $default_padding/2;
+        .user_block {
+            position: static;
+            display: block;
+            text-decoration: none;
+            width: auto;
+            div {
+                line-height: 1.3em;
+            }
+        }
+    }
+}

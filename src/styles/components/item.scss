@@ -1,0 +1,181 @@
+.item {
+    width: 31%;
+    display: block;
+    background: #fff;
+    box-sizing: border-box;
+    padding: $default_padding/2 $default_padding/2 $default_padding*2;
+    text-decoration: none;
+    //border-radius: $default_padding/4;
+    box-shadow: 0 0 20px rgba(200,200,200,.3);
+    @include clearfix;
+    @include transition;
+    position: relative;
+    margin: 1%;
+    h2 {
+        margin: 0 0 10px;
+        padding-right: $default_padding/2;
+        font-size: 1.4em;
+        font-weight: 400;
+        word-break: break-word;
+        line-height: 1em;
+    }
+    
+    h4 {
+        font-weight: 500;
+        color: lighten($font_color, $amount: 60);
+        margin: 0 0 $default_padding/4;
+        word-break: break-word;
+        
+    }
+
+    .item_description {
+        font-size: .8em;
+        color: lighten($color: $font_color, $amount: 40);
+        margin: 0 0 $default_padding/4;
+        word-break: break-word;
+    }
+
+    .user_block {
+        position: absolute;
+        right: $default_padding/2;
+        bottom: $default_padding/2;
+    }
+    .is_fork {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 5px;
+        background: $controls-color;
+        @include rectangle($default_padding);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+        svg {
+            fill: $app_color;
+            float: right;
+        }
+
+        &.fork {
+            background: transparentize($controls-color, .6);
+        }
+
+    }
+    .stars {
+        float: left;
+        line-height: 2em;
+        vertical-align: middle;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        font-weight: 300;
+        color: #fff;
+        font-size: .6em;
+        z-index: 2;
+        padding: 0 0 0 5px;
+        background: lighten($color: $font_color, $amount: 20%);
+        box-sizing: border-box;
+        //border-radius: 0 $default_padding/4 $default_padding/4 $default_padding/4;
+        font-family: Verdana, Sans-Serif;
+        
+        &.small {
+            background: lighten($color: $font_color, $amount: 50%);
+        }
+        &:before {
+            vertical-align: middle;
+            content: '';
+            display: inline-block;
+            @include rectangle(16px);
+            clip-path: polygon(0% 35%,33% 33%, 50% 0%, 66% 33%, 100% 35%,70% 55%, 85% 90%, 50% 70%, 15% 90%, 30% 55% );
+            background:  #fff;
+            margin: 0 1px 0 0; 
+            z-index: -2;
+        }
+
+        .forks {
+            background: lighten($color: $font_color, $amount: 20%);
+            color: #fff;
+            display: inline-block;
+            font: inherit;
+            padding: 0 5px;
+            margin: 0 0 0 5px;
+            //border-radius: 0 $default_padding/4 $default_padding/4 0;
+
+            svg {
+                fill: #fff;
+                position: relative;
+                top: 4px;
+                margin: 0 2px 0 0;
+            }
+
+            &.small {
+                background: lighten($color: $font_color, $amount: 50%);
+            }
+        }
+        .language {
+            float: right;
+            padding: 3px 7px;
+            min-width: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.5em;
+            vertical-align: middle;
+            font-weight: 500;
+            color: #fff;
+            background: darken($controls-color, 5%); 
+            //border-radius: 0 $default_padding/4 $default_padding/4 0;
+        }
+    }
+
+    &.user {
+        padding: $default_padding/2;
+        width: 23%;
+        .user_block {
+            position: static;
+            div {
+                text-align: left;
+                margin-right: $img_size;
+                line-height: $font_size;
+                b {
+                    word-break: break-word;
+                }
+            }
+            img {
+                vertical-align: middle;
+            }
+        }
+        .score {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 0 4px 0 0;
+            background: lighten($controls-color,10%);
+            font-weight: 500;
+            color: #fff;
+            font-size: .8em;
+            label {
+                font: inherit;
+                color: #fff;
+                display: inline-block;
+                padding: 0 4px;
+                font-size: 1em;
+                font-weight: 400;
+                background: darken($controls-color,10%);   
+            }
+        }
+    }
+}
+
+.user_block {
+    div {
+        line-height: $img_size;
+        font-size: .8em;
+        text-align: right;
+        word-break: break-word;
+    }
+    img {
+        float: right;
+        @include rectangle($img_size);
+        border-radius: 50%;
+        border: 3px solid $border_color;
+        margin: 0 0 0 10px;
+        box-sizing: border-box;
+    }
+}

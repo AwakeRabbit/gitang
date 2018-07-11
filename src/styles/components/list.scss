@@ -1,0 +1,13 @@
+.list {
+    display: flex;
+    //justify-content: space-between;
+    flex-wrap: wrap;
+    margin: $default_padding 0 0;
+    justify-content: left;
+    @include transition;
+    .list_show_more {
+        display: block;
+        margin: $default_padding/2 auto;
+        box-shadow: 0 0 10px rgba(155,155,155,.1)
+    }
+}

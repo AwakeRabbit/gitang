@@ -1,0 +1,258 @@
+#app {
+    .repo_info {
+        h1 {
+            margin-right: 130px;
+            b {
+                display: block;
+                font-weight: 500;
+                font-size: .5em;
+            }
+            label {
+                display: block;
+                font-weight: 300;
+                font-size: .4em;
+                span {
+                    font: inherit;
+                    font-weight: 500;
+                }
+            }
+            a {
+                font-weight: 500;
+                font-size: .4em;
+                color: darken($controls_color, 5%);
+                display: block;
+            }
+        }
+
+        .stars {
+            float: right;
+            line-height: 3em;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: .8em;
+            z-index: 0;
+            padding: 0 0 0 5px;
+            box-sizing: border-box;
+            border-radius: $default_padding/4;
+            font-family: Verdana, Sans-Serif;
+            
+            &.small {
+                &:before {
+                    background: lighten($color: $font_color, $amount: 50%);
+                }
+            }
+            &:before {
+                vertical-align: middle;
+                content: '';
+                display: inline-block;
+                @include rectangle(16px);
+                clip-path: polygon(0% 35%,33% 33%, 50% 0%, 66% 33%, 100% 35%,70% 55%, 85% 90%, 50% 70%, 15% 90%, 30% 55% );
+                background:  $font_color;
+                margin: 0 1px 0 0; 
+                z-index: -2;
+            }
+
+            .forks {
+                display: inline-block;
+                font: inherit;
+                padding: 0 5px;
+                margin: 0 0 0 5px;
+                border-radius: 0 $default_padding/4 $default_padding/4 0;
+
+                svg {
+                    fill: $font_color;
+                    position: relative;
+                    top: 4px;
+                    margin: 0 2px 0 0;
+                }
+
+                &.small {
+                    svg {fill: lighten($color: $font_color, $amount: 50%);}
+                }
+            }
+        }
+        
+        .languages {
+            margin: 5px 0 0;
+            float: left;
+            .lang {
+                float: left;
+                padding: 3px 5px;
+                background: transparentize($controls_color, .3);
+                color: lighten($font_color, 10%);
+                font-weight: 500;
+                margin: 5px 5px 0 0;
+                border-radius: 3px;
+                font-size: .9em;
+            }
+        }
+
+        .file_list {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            font-weight: 600;
+            padding-left: 20px;
+            @include transition;
+            .dir,.file {
+                font: inherit;
+                @include transition;
+                svg {
+                    height: 20px;
+                    vertical-align: middle;
+                    float: left;
+                    clear: left;
+                }
+                b {
+                    margin-left: 30px;
+                    display: block;
+                    min-height: 22px;
+                    line-height: 1.3em;
+                    padding: 3px 0 0;
+                }
+
+                .file_list {
+                    height: 0;
+                    opacity: 0;
+                    overflow: hidden;
+
+                    &.expanded {
+                        height: auto;
+                        opacity: 1;
+                        overflow: unset;
+                    }
+                }
+
+                
+
+                &:hover {
+                    background: darken($color: $app_color, $amount: 5%);
+                    cursor: pointer;
+                    .file_list {
+                        background: $app_color;
+                    }
+                }
+            }
+        }
+        >.file_list {
+            overflow: auto;
+            max-height: 600px;
+
+        }
+
+        .file_info {
+            @include rectangle(0);
+            position: fixed;
+            overflow: hidden;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,.1);
+            display: flex;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+            cursor: default;
+            .body {
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 12px;
+                font-weight: 600;
+                max-width: $max_site_width;
+                max-height: 90%;
+                width: 90%;
+                background: $app_color;
+                min-height: 300px;
+                position: relative;
+                section {
+                    overflow-y: auto;
+                    display: block;
+                    max-width: 100%;
+                    padding: $default_padding/2;
+                    max-height: 400px;
+                    white-space: pre;
+                    cursor: text;
+                    img {
+                        max-width: 95%;
+                        max-height: 95%;
+                        margin: auto;
+                        display: block;
+                    }
+
+                    &.md,&.md code {
+                        white-space: pre-wrap;
+                        word-break: break-word;
+                    }
+                }
+                header {
+                    position: relative;
+                    cursor: pointer;
+                    &:after, &:before {
+                        position: absolute;
+                        top: 27px;
+                        right: 20px;
+                        height: 1px;
+                        width: 20px;
+                        background: $font_color;
+                        content: '';
+                        display: block;
+                        transform: rotate(45deg);
+                        transform-origin: center;
+                    }
+                    &:after {
+                        transform: rotate(-45deg)
+                    }
+                }
+            }
+            @include transition;
+
+            &.expanded {
+                @include rectangle(100%);
+                opacity: 1;
+                overflow: unset;
+                z-index: 21;
+            }
+
+        }
+
+        .readme {
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: $default_padding/2;
+            background: $app_color;
+            margin: $default_padding 0;
+            border: 1px solid $border_color;
+            font-weight: 600;
+            img {
+                max-width: 100%;
+            }
+            ul {
+                padding: 0 $default_padding;
+                li {
+                    line-height: 1.2em;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+
+            @for $i from 1 through 5 {
+                h#{$i} {
+                    font-weight: 400;
+                    margin: 0;
+                } 
+            }
+
+            code {
+                overflow: auto;
+                max-width: 100%;
+                display: block;
+                background: #fff;
+                padding: $default_padding/2;
+                border: 1px solid $border_color;
+                margin: 5px 0;
+                font-family: 'Courier New', 'Courier', monospace;
+            }
+            
+        }
+
+    }
+}

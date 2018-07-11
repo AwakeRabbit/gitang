@@ -1,0 +1,16 @@
+@mixin clearfix{
+    &:before,&:after {
+        content: ' ';
+        display: block;
+        clear: both;
+    }
+}
+
+@mixin transition {
+    transition: all ease-in .3s;
+}
+
+@mixin rectangle($size) {
+    width: $size;
+    height: $size;
+}
