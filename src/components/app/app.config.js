@@ -1,11 +1,13 @@
+import Storage from "../storage";
 angular.
     module('app').
     config(['$locationProvider', '$routeProvider',
         function config($locationProvider, $routeProvider) {
-            $locationProvider.html5Mode(true);
+            let user = new Storage().getUser()
+            $locationProvider.html5Mode(true)
             $routeProvider.
                 when('/', {
-                    redirectTo: '/activity'
+                    redirectTo: (user.isAuth === true) ? '/activity' : '/login'
                 }).
                 when('/activity', {
                     template: '<activity></activity>'
@@ -13,15 +15,17 @@ angular.
                 when('/users', {
                     template: '<users></users>'
                 }).
+                when('/user/:nickname', {
+                    template: '<user></user>'
+                }).
                 when('/repos', {
                     template: '<repos></repos>'
                 }).
                 when('/404', {
                     template: '<not-found></not-found>'
                 }).
-                when('/login', {
-                    template: '<login></login>'
-                }).
+                when('/login', (user.isAuth == true) ? {redirectTo: '/'} : {
+                    template: '<login></login>'}).
                 when('/logout', {
                     template: '<logout></logout>'
                 }).

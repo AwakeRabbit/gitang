@@ -4,25 +4,23 @@ let activity = () => {
   return {
     template: require('./template.html'),
     controller: 'ActivityCtrl',
-    controllerAs: 'ctrl'
+    controllerAs: 'activity'
   }
 }
 
 class ActivityCtrl {
-  constructor($http) {
-    this.http = $http
+  constructor($http, storage) {
     this.text = 'activity'
-
-    this.getData()
+    this.storage = storage
+    this.http = $http
+    this.reloadActivity()
   }
 
-  getData() {
-    this.http.get('http://localhost:3000/items').then((response) => {this.items = response.data})
-  }
-
-  onClick(e) {
-    console.log(e)
-  }
+  reloadActivity() {
+    let storage = this.storage;
+    this.http.get(`https://api.github.com/users/${storage.user.login}/received_events/public?access_token=${storage.token}`)
+        .then(result => {this.items = result.data; console.log(this.items)})
+}
 }
 
 

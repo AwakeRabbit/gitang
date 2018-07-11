@@ -1,5 +1,6 @@
 export {default as activity} from './activity'
 export {default as login} from './login'
+export {default as logout} from './logout'
 export {default as notFound} from './not-found'
 export {default as appMenu} from './menu'
 export {default as userInfo} from './user/user.info'

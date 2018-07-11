@@ -1,4 +1,15 @@
 <form action="">
-  <h1 ng-click="login.onClick()">{{ctrl.text}}</h1>
-  <div ng-repeat="item in ctrl.items">{{item.id}}</div>
+  <div class="list activity">
+    <div class="item" ng-repeat="item in activity.items">
+      <a class="user_block" ng-href="{{'/repo/' + item.repo.name}}">
+        <img ng-src={{item.actor.avatar_url}} alt={{item.actor.login}} />
+        <div class="name">
+          <b>{{item.actor.login}}</b>
+          {{item.type == 'WatchEvent' ? ' starred ' : ' created '}}
+          <b>{{item.repo.name}}</b>
+        </div>
+        <div class="date">{{Date(item.created_at).toLocaleString()}}</div>
+      </a>
+    </div>
+  </div>
 </form>

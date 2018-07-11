@@ -1,4 +1,6 @@
-
-<form action="">
-  <h1 ng-click="onClick(event)">{{text}}</h1>
-</form>
+<form id="login" ng-submit="login.submit()">
+  <h1>Login</h1>
+  <input type="text" placeholder="GitHub login" ng-model="login.login" required>
+  <input type="password" placeholder="GitHub password" ng-model="login.password" required>
+  <button >Log In</button>
+</div>

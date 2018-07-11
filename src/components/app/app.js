@@ -9,11 +9,11 @@ const MODULE_NAME = 'app';
 let app = () => {
   return {
     template: require('./template.html'),
-    controller: (storage) => {console.log(storage.menu)}
+    controller: (storage) => {}
   }
 }
 
-angular.module('app', ['ngRoute', 'app.login', 'appActivity', 'app.notFound', 'appMenu'])
+angular.module('app', ['ngRoute', 'app.login', 'appActivity', 'app.notFound', 'appMenu', 'app.logout'])
   .directive('app', app)
   .service('storage', AppStorage)
 
