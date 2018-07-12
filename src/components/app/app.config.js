@@ -13,13 +13,13 @@ angular.
                     template: '<activity></activity>'
                 }).
                 when('/users', {
-                    template: '<users></users>'
+                    template: '<search></search>'
                 }).
                 when('/user/:nickname', {
                     template: '<user></user>'
                 }).
                 when('/repos', {
-                    template: '<repos></repos>'
+                    template: '<search></search>'
                 }).
                 when('/404', {
                     template: '<not-found></not-found>'

@@ -28,11 +28,11 @@ export default class AppFactory {
         receivedUser.getProfile()
             .then(result => {
                 dispatch(result.data)
-                this.getFollowing(userName,dispatch)
-                this.getFollowers(userName,dispatch)
-                this.checkFollowing(this.user.login, userName,dispatch)
+                this.getFollowing(userName, dispatch)
+                this.getFollowers(userName, dispatch)
+                this.checkFollowing(this.user.login, userName, dispatch)
             })
-    
+
         receivedUser.listRepos()
             .then(result => {
                 dispatch({
@@ -44,23 +44,42 @@ export default class AppFactory {
     getFollowing(user, dispatch) {
         fetch(`https://api.github.com/users/${user}/following?access_token=${this.token}`)
             .then(result => result.json())
-            .then(data => dispatch({following_list: Array.isArray(data) ? data : [], userName: user }))
+            .then(data => dispatch({ following_list: Array.isArray(data) ? data : [], userName: user }))
             .catch(error => dispatch({ following_list: [], userName: user }))
     }
-    
-    
-    checkFollowing(user, member,dispatch) {
+
+
+    checkFollowing(user, member, dispatch) {
         fetch(`https://api.github.com/users/${user}/following/${member}?access_token=${this.token}`)
             .then(result => dispatch({ isFollowing: (result.status === 204) }))
             .catch(error => dispatch({ isFollowing: false }))
     }
-    
-    
+
+
     getFollowers(user, dispatch) {
         fetch(`https://api.github.com/users/${user}/followers?access_token=${this.token}`)
             .then(result => result.json())
-            .then(data => dispatch({followers_list: Array.isArray(data) ? data : [], userName: user }))
+            .then(data => dispatch({ followers_list: Array.isArray(data) ? data : [], userName: user }))
             .catch(error => dispatch({ followers_list: [], userName: user }))
+    }
+
+    searchUsers(keyWord, dispatch) {
+        let s = this.getGH()
+        const search = s.search({ per_page: 100 });
+
+        search.forUsers({ q: keyWord })
+            .then(result => dispatch({ keyWords: keyWord, list: result.data }))
+            .catch((error) => { console.log('Error on users search'); dispatch({ list: [] }) })
+    }
+
+    searchRepos(keyWord, dispatch) {
+        let s = this.getGH()
+        const search = s.search({ per_page: 100 });
+
+        search.forRepositories({ q: keyWord })
+            .then(result => { dispatch({ keyWords: keyWord, list: result.data }) })
+            .catch((error) => { console.log('Error on repos search'); dispatch({ list: [] }) })
+
     }
 
     logout() {
@@ -88,5 +107,5 @@ export default class AppFactory {
             })
     }
 
-    
+
 }
