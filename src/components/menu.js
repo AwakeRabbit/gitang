@@ -1,13 +1,16 @@
 import angular from 'angular'
 import app from './app/app';
 class MenuCtrl {
-  constructor($location, storage) {
-    this.title = 'app'
-    this.allPages = storage.menu
-    this.user = storage.user
-    this.location = $location
-    this.checkActiveItem();
-    window.addEventListener('popstate',this.checkActiveItem.bind(this));
+  constructor($location, storage, $scope) {
+    $scope.title = 'app'
+    $scope.allPages = storage.menu
+    $scope.user = storage.user
+    $scope.location = $location
+    $scope.checkActiveItem = this.checkActiveItem.bind($scope)
+    $scope.checkAvailability = this.checkAvailability.bind($scope)
+    $scope.setActiveItem = this.setActiveItem.bind($scope)
+    $scope.$on('$locationChangeSuccess', $scope.checkActiveItem)
+    $scope.checkActiveItem()
   }
 
   checkActiveItem() {
@@ -33,11 +36,10 @@ class MenuCtrl {
 
 
 let appMenu = () => ({
-  template: `<header><user-info ng-show="menu.user.isAuth === true"></user-info><menu>
-    <a ng-repeat='i in menu.allPages' ng-href='{{i.path}}' class="{{i.active ? 'active' : ''}}" ng-click="menu.setActiveItem(i)">{{i.caption}}</a>
+  template: `<header><user-info ng-show="user.isAuth === true"></user-info><menu>
+    <a ng-repeat='i in allPages' ng-href='{{i.path}}' ng-class="{active : i.active}" ng-click="menu.setActiveItem(i)">{{i.caption}}</a>
   </menu></header>`,
   controller: MenuCtrl,
-  controllerAs: 'menu'
 })
 
 angular

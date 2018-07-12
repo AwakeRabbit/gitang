@@ -19,7 +19,7 @@ class ActivityCtrl {
   reloadActivity() {
     let storage = this.storage;
     this.http.get(`https://api.github.com/users/${storage.user.login}/received_events/public?access_token=${storage.token}`)
-        .then(result => {this.items = result.data; console.log(this.items)})
+        .then(result => {this.items = result.data})
 }
 }
 

@@ -13,7 +13,7 @@ let app = () => {
   }
 }
 
-angular.module('app', ['ngRoute', 'app.login', 'appActivity', 'app.notFound', 'appMenu', 'app.logout'])
+angular.module('app', ['ngRoute', 'app.login', 'appActivity', 'app.notFound', 'appMenu', 'app.logout', 'app.user'])
   .directive('app', app)
   .service('storage', AppStorage)
 

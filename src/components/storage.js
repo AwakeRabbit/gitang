@@ -14,8 +14,53 @@ export default class AppFactory {
             ]
     }
 
+    getGH() {
+        return (this.user) ? new GitHub({ username: this.user.login, password: this.user.password }) : new GitHub()
+    }
+
     getUser() {
         return JSON.parse(localStorage['user'] || '{"isAuth": "false"}')
+    }
+
+    getMember(userName, dispatch) {
+        let g = this.getGH()
+        const receivedUser = g.getUser(userName);
+        receivedUser.getProfile()
+            .then(result => {
+                dispatch(result.data)
+                this.getFollowing(userName,dispatch)
+                this.getFollowers(userName,dispatch)
+                this.checkFollowing(this.user.login, userName,dispatch)
+            })
+    
+        receivedUser.listRepos()
+            .then(result => {
+                dispatch({
+                    repos: result.data.filter(r => r.owner.login.toLowerCase() === userName.toLowerCase())
+                })
+            })
+    }
+
+    getFollowing(user, dispatch) {
+        fetch(`https://api.github.com/users/${user}/following?access_token=${this.token}`)
+            .then(result => result.json())
+            .then(data => dispatch({following_list: Array.isArray(data) ? data : [], userName: user }))
+            .catch(error => dispatch({ following_list: [], userName: user }))
+    }
+    
+    
+    checkFollowing(user, member,dispatch) {
+        fetch(`https://api.github.com/users/${user}/following/${member}?access_token=${this.token}`)
+            .then(result => dispatch({ isFollowing: (result.status === 204) }))
+            .catch(error => dispatch({ isFollowing: false }))
+    }
+    
+    
+    getFollowers(user, dispatch) {
+        fetch(`https://api.github.com/users/${user}/followers?access_token=${this.token}`)
+            .then(result => result.json())
+            .then(data => dispatch({followers_list: Array.isArray(data) ? data : [], userName: user }))
+            .catch(error => dispatch({ followers_list: [], userName: user }))
     }
 
     logout() {

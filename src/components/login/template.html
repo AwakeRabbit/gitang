@@ -1,6 +1,6 @@
 <form id="login" ng-submit="login.submit()">
   <h1>Login</h1>
-  <input type="text" placeholder="GitHub login" ng-model="login.login" required>
-  <input type="password" placeholder="GitHub password" ng-model="login.password" required>
-  <button >Log In</button>
+  <input type="text" placeholder="GitHub login" ng-model="login.login" ng-required="required">
+  <input type="password" placeholder="GitHub password" ng-model="login.password" ng-required="required">
+  <button ng-disabled="!login.password || !login.login">Log In</button>
 </div>

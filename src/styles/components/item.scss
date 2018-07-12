@@ -1,4 +1,4 @@
-.item {
+.item, repo-item, user-item {
     width: 31%;
     display: block;
     background: #fff;
@@ -177,5 +177,14 @@
         border: 3px solid $border_color;
         margin: 0 0 0 10px;
         box-sizing: border-box;
+    }
+}
+repo-item, user-item {
+    padding: 0;
+    .item, .item.user {
+        width: 100%;
+        display: block;
+        margin: 0;
+
     }
 }
