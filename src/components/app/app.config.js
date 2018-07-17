@@ -7,7 +7,7 @@ angular.
             $locationProvider.html5Mode(true)
             $routeProvider.
                 when('/', {
-                    redirectTo: (user.isAuth === true) ? '/activity' : '/login'
+                    template: (user.isAuth === true) ? '<activity></activity>' : '<login></login>'
                 }).
                 when('/activity', {
                     template: '<activity></activity>'
