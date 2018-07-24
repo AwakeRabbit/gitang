@@ -22,7 +22,7 @@ class LoginCtrl {
 
 const MODULE_NAME = 'login';
 
-angular.module('app.login',[])
+angular.module('app.login',['storage'])
   .directive('login', login)
 
 export default MODULE_NAME;
