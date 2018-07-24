@@ -13,6 +13,15 @@ class UserCtrl {
         this.scope = $scope;
     }
 
+    followMember(member) {
+        console.log(this)
+        this.storage.followMember(member, data => {this.isFollowing = data.isFollowing; this.scope.$apply()})
+    }
+
+    unfollowMember(member) {
+        this.storage.unfollowMember(member, data => {this.isFollowing = data.isFollowing; this.scope.$apply()})
+    }
+
     getMember() {
         this.activeTab = 'repos'
         this.storage.getMember(this.memberName, (partData) => { this.member = { ...this.member, ...partData }; this.scope.$apply() })

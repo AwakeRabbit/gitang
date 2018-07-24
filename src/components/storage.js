@@ -1,4 +1,4 @@
-import GitHub from 'github-api'
+import GitHub from 'github-api' 
 export default class AppFactory {
     constructor() {
         this.token = '4636cab78e97f7240a0c94d3102b2150cb7f8a09'
@@ -82,6 +82,24 @@ export default class AppFactory {
 
     }
 
+    followMember(memberName, dispatch) {
+        let g = this.getGH();
+        g.getUser(memberName).follow()
+            .then(result => { this.checkFollowing(this.user.login, memberName, dispatch); })
+    }
+    
+    unfollowMember(memberName, dispatch) {
+        let g = this.getGH();
+        g.getUser(memberName).unfollow()
+            .then(result => { this.checkFollowing(this.user.login, memberName, dispatch); })
+    }
+    
+    checkFollowing(user, member, dispatch) {
+        fetch(`https://api.github.com/users/${user}/following/${member}?access_token=${this.token}`)
+            .then(result => dispatch({ isFollowing: (result.status === 204) }))
+            .catch(error => dispatch({isFollowing: false }))
+    }
+
     logout() {
         localStorage.removeItem('user')
         window.location.reload()
@@ -98,11 +116,11 @@ export default class AppFactory {
                 this.saveDataToStorage({ ...result.data, password: uPass, isAuth: true })
                 this.user = this.getUser()
                 location.pathname = "/"
-                //getFollowing(result.data.login)(dispatch)
+                getFollowing(result.data.login)(dispatch)
             })
             .catch(error => {
                 localStorage.removeItem('user');
-                //dispatch({ type: LOGIN_ACTIONS.LOG_OUT });
+                dispatch({ type: LOGIN_ACTIONS.LOG_OUT });
                 //Informer.inform('The username or password are incorrect');
             })
     }

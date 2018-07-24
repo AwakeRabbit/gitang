@@ -2,8 +2,9 @@
 var webpack = require('webpack');
 var path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const isProd = process.argv.indexOf('-p') !== -1;
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -79,6 +80,8 @@ module.exports = {
             disable: !isProd,
             allChunks: true
         }),
+        new CopyWebpackPlugin((isProd) ? [{from: './src/public/fonts/*', to: './fonts/[name].[ext]'},
+                                            {from: './src/public/img/*', to: './img/[name].[ext]'} ] : []),
         new UglifyJsPlugin({
             test: /\.js($|\?)/i,
             exclude: /\/node_modules/,
