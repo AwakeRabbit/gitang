@@ -26,6 +26,6 @@ class ActivityCtrl {
 
 angular.module('appActivity', ['ngRoute'])
   .directive('activity', activity)
-  .controller('ActivityCtrl', ActivityCtrl);
+  .controller('ActivityCtrl', ['$http', 'storage', ActivityCtrl]);
 
 export default 'activity';

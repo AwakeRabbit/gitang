@@ -21,7 +21,7 @@ let userInfo = {
                 </div>
             </div>
     `,
-    controller: UserCtrl,
+    controller: ['storage', UserCtrl],
     controllerAs: 'info'
 }
 
@@ -32,4 +32,3 @@ angular
 export default 'userInfo'
 
 
-   

@@ -78,8 +78,8 @@ export default class AppFactory {
         const search = s.search({ per_page: 100 });
         UIBlocker.block()
         search.forRepositories({ q: keyWord })
-            .then(result => { IBlocker.unblock(); dispatch({ keyWords: keyWord, list: result.data }) })
-            .catch((error) => { IBlocker.unblock(); dispatch({ list: [] }) })
+            .then(result => { UIBlocker.unblock(); dispatch({ keyWords: keyWord, list: result.data }) })
+            .catch((error) => { UIBlocker.unblock(); dispatch({ list: [] }) })
 
     }
 

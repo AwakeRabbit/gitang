@@ -41,11 +41,12 @@ let appMenu = () => ({
   template: `<header><user-info ng-show="user.isAuth === true"></user-info><menu>
     <a ng-repeat='i in allPages' ng-href='{{i.path}}' ng-class="{active : i.active}" ng-click="menu.setActiveItem(i)">{{i.caption}}</a>
   </menu></header>`,
-  controller: MenuCtrl,
+  controller: ['$location', 'storage', '$scope', MenuCtrl],
 })
 
 angular
   .module('appMenu', ['app.userinfo'])
   .directive('appMenu', appMenu)
+  .controller('MenuCtrl', ['$location', 'storage', '$scope', MenuCtrl])
   
 export default 'appMenu'

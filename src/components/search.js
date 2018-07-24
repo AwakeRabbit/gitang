@@ -43,7 +43,7 @@ const search = {
                     <button class="white list_show_more" ng-show="countToShow < list.length" ng-click="countToShow = countToShow + pageSize">Show more</button>
                 </div>
             `,
-        controller: SearchCtrl,
+        controller: ['storage', '$scope', '$location', SearchCtrl],
         bindings: {
             type: '='
         }

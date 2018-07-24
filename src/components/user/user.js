@@ -49,7 +49,7 @@ let user = {
                 <user-item ng-switch-when="followers" ng-repeat="item in user.member.followers_list || []" user="item"></user-item>
             </div>
         </div>`,
-    controller: UserCtrl,
+    controller:['storage', '$routeParams', '$scope', UserCtrl],
     controllerAs: 'user'
 }
 
