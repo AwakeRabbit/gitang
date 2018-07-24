@@ -1,4 +1,5 @@
-import GitHub from 'github-api' 
+import GitHub from 'github-api'
+import { Informer, UIBlocker } from '../utils'
 export default class AppFactory {
     constructor() {
         this.token = '4636cab78e97f7240a0c94d3102b2150cb7f8a09'
@@ -66,19 +67,19 @@ export default class AppFactory {
     searchUsers(keyWord, dispatch) {
         let s = this.getGH()
         const search = s.search({ per_page: 100 });
-
+        UIBlocker.block()
         search.forUsers({ q: keyWord })
-            .then(result => dispatch({ keyWords: keyWord, list: result.data }))
-            .catch((error) => { console.log('Error on users search'); dispatch({ list: [] }) })
+            .then(result => { UIBlocker.unblock(); dispatch({ keyWords: keyWord, list: result.data }) })
+            .catch((error) => { UIBlocker.unblock(); dispatch({ list: [] }) })
     }
 
     searchRepos(keyWord, dispatch) {
         let s = this.getGH()
         const search = s.search({ per_page: 100 });
-
+        UIBlocker.block()
         search.forRepositories({ q: keyWord })
-            .then(result => { dispatch({ keyWords: keyWord, list: result.data }) })
-            .catch((error) => { console.log('Error on repos search'); dispatch({ list: [] }) })
+            .then(result => { IBlocker.unblock(); dispatch({ keyWords: keyWord, list: result.data }) })
+            .catch((error) => { IBlocker.unblock(); dispatch({ list: [] }) })
 
     }
 
@@ -87,17 +88,17 @@ export default class AppFactory {
         g.getUser(memberName).follow()
             .then(result => { this.checkFollowing(this.user.login, memberName, dispatch); })
     }
-    
+
     unfollowMember(memberName, dispatch) {
         let g = this.getGH();
         g.getUser(memberName).unfollow()
             .then(result => { this.checkFollowing(this.user.login, memberName, dispatch); })
     }
-    
+
     checkFollowing(user, member, dispatch) {
         fetch(`https://api.github.com/users/${user}/following/${member}?access_token=${this.token}`)
             .then(result => dispatch({ isFollowing: (result.status === 204) }))
-            .catch(error => dispatch({isFollowing: false }))
+            .catch(error => dispatch({ isFollowing: false }))
     }
 
     logout() {
@@ -110,18 +111,21 @@ export default class AppFactory {
     }
 
     login(uName, uPass) {
-        let user = new GitHub({ username: uName, password: uPass }).getUser();
+        let user = new GitHub({ username: uName, password: uPass }).getUser()
+        UIBlocker.block()
         user.getProfile()
             .then(result => {
+                UIBlocker.unblock()
                 this.saveDataToStorage({ ...result.data, password: uPass, isAuth: true })
                 this.user = this.getUser()
                 location.pathname = "/"
-                getFollowing(result.data.login)(dispatch)
+                //this.getFollowing(result.data.login, dispatch)
             })
             .catch(error => {
+                UIBlocker.unblock()
                 localStorage.removeItem('user');
-                dispatch({ type: LOGIN_ACTIONS.LOG_OUT });
-                //Informer.inform('The username or password are incorrect');
+                //dispatch({ type: LOGIN_ACTIONS.LOG_OUT });
+                Informer.inform('The username or password are incorrect')
             })
     }
 

@@ -9,6 +9,7 @@
         left: 0;
         top: 0;
         width: 100%;
+        box-sizing: border-box;
         padding-right: 120px;
         box-shadow: 0 2px 20px darken($app_color,2%);
     }
@@ -18,9 +19,9 @@
         float: right;
         width: 100px;
         text-align: center;
-        padding: $default_padding - 15px;
+        box-sizing: border-box;
         position: relative;
-        height: 47px;
+        height: 45px;
     }
 
     .search_box_count {

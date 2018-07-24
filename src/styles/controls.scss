@@ -12,6 +12,7 @@ button, .button {
     color: #fff;
     outline: none;
     vertical-align: middle;
+    
     cursor: pointer;    
     user-select: none;
 
@@ -55,18 +56,21 @@ button, .button {
         }
     }
 }
-
+input {
+    height: $default_padding * 1.5;
+}
 input, textarea {
     display: inline-block;
-    border: none;
+    border: 1px solid transparent;
     border-radius: $default_padding;
     background: #ffffff;
     box-sizing: border-box;
-    padding: $default_padding - 16px $default_padding;
+    padding: $default_padding - 15px $default_padding;
     line-height: 1em;
     margin: 0;
     font-size: $font_size;
     outline: none;
+
 
     &.ng-invalid, &.ng-empty {
         border: 1px solid rgba(255,0,0,.4);

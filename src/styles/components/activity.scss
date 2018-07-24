@@ -1,8 +1,8 @@
 .list.activity {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     @include clearfix;
     .item {
-        float: left;
         padding: $default_padding/2;
         .user_block {
             position: static;

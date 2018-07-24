@@ -14,21 +14,27 @@ class SearchCtrl {
         $scope.countToShow = $scope.pageSize
         $scope.list = []
         $scope.search = this.search.bind($scope)
+        $scope.onKeyDown = this.onKeyDown.bind($scope)
+    }
+
+    onKeyDown(e) {
+        if (e.keyCode != 13) return true;
+        this.search(this.keyWords)
     }
 
     search(word) {
         this.isLoading = true;
         this.countToShow = this.pageSize
         let search = this.type === 'repos' ? this.storage.searchRepos.bind(this.storage) : this.storage.searchUsers.bind(this.storage)
-        search(word, data => {this.isLoading = false; this.list = [...data.list];console.log('end of search', this.list.length); this.$apply() })
+        search(word, data => {this.isLoading = false; this.list = [...data.list]; this.$apply() })
     }
 }
 const search = {
     template: `
                 <h1>{{caption}}</h1>
                 <div class="search_box">
-                  <input type="search" ng-model="keyWords" ng-min-length="3" placeholder="Type any to search..." />
-                  <button type="button" ng-class="{loading: isLoading}" ng-click="search(keyWords)" ng-disabled="keyWords.length < 3">Search</button>
+                  <input type="search" ng-model="keyWords" ng-min-length="3" placeholder="Type any to search..." ng-keydown="onKeyDown($event)" />
+                  <button type="button" ng-class="{loading: isLoading}" ng-click="search(keyWords)" ng-disabled="keyWords.length < 3" id="search_btn">Search</button>
                   <div class="search_box_count">{{list && list.length > 0 ? list.length + 'items found' : ''}}</div>
                 </div>
                 <div class="list">

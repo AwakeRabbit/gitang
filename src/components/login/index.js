@@ -1,5 +1,5 @@
 import angular from 'angular'
-
+import AppFactory from '../storage'
 let login = () => {
   return {
     template: require('./template.html'),
@@ -9,8 +9,8 @@ let login = () => {
 }
 
 class LoginCtrl {
-  constructor(storage) {
-    this.storage = storage
+  constructor() {
+    this.storage = new AppFactory()
     this.login = ''
     this.password = ''
   }
@@ -22,7 +22,7 @@ class LoginCtrl {
 
 const MODULE_NAME = 'login';
 
-angular.module('app.login',['storage'])
+angular.module('app.login',[])
   .directive('login', login)
 
 export default MODULE_NAME;

@@ -4,10 +4,12 @@
   "description": "A workflow for Angular made with Webpack",
   "scripts": {
     "build": "webpack -p",
+    "build_dev": "webpack -d",
     "api": "json-server data.json",
     "start": "webpack-dev-server && json-server data.json",
     "publish": "surge --project ./dist --domain gitang.surge.sh",
-    "deploy": "npm run build && npm run publish"
+    "deploy": "npm run build && npm run publish",
+    "dev_deploy": "npm run build_dev && npm run publish"
 
   },
   "author": "Jesus Rodriguez",

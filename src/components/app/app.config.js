@@ -1,4 +1,6 @@
-import Storage from "../storage";
+import Storage from "../storage"
+import angular from 'angular'
+import 'angular-route'
 angular.
     module('app').
     config(['$locationProvider', '$routeProvider',

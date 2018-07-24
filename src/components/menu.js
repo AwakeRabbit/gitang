@@ -17,7 +17,9 @@ class MenuCtrl {
     let path = (this.location.url() || '').trim()
     let activeKey = -1
     let entry = path.substr(0, 4);
-    this.allPages = this.allPages.map((item) => ({ ...item, active: (item.path.indexOf(entry) >= 0)}))
+    let needKey = (this.allPages.filter(i => i.path.indexOf(entry) >= 0) || [{key: (this.user.isAuth) ? 0 : 3}])[0].key;
+    if (entry === '/' || entry === '') needKey = (this.user.isAuth === true) ? 0 : 3
+    this.allPages = this.allPages.map((item) => ({ ...item, active: item.key == needKey}))
     this.checkAvailability()
   }
 

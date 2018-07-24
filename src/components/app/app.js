@@ -9,12 +9,11 @@ const MODULE_NAME = 'app';
 let app = () => {
   return {
     template: require('./template.html'),
-    controller: (storage) => {}
+    controller: () => { }
   }
 }
 
 angular.module('app', ['ngRoute', 'app.login', 'appActivity', 'app.notFound', 'appMenu', 'app.logout', 'app.user', 'app.search'])
   .directive('app', app)
   .service('storage', AppStorage)
-
-export default 'app';
+export default app;
