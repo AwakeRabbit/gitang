@@ -1,5 +1,4 @@
 import angular from 'angular'
-import app from '../app/app';
 import userItem from './user.item'
 import repoItem from '../repo/item.repo'
 class UserCtrl {

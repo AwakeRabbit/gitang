@@ -1,6 +1,6 @@
-import Storage from "../storage"
 import angular from 'angular'
-import 'angular-route'
+import {AppStorage as Storage} from "../../services"
+
 angular.
     module('app').
     config(['$locationProvider', '$routeProvider',
@@ -19,6 +19,9 @@ angular.
                 }).
                 when('/user/:nickname', {
                     template: '<user></user>'
+                }).
+                when('/repo/:nickname/:repoName', {
+                    template: '<repo></repo>'
                 }).
                 when('/repos', {
                     template: '<search></search>'

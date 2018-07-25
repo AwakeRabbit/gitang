@@ -1,5 +1,5 @@
 import angular from 'angular'
-import AppFactory from '../storage'
+import {AppFactory} from '../../services'
 let login = () => {
   return {
     template: require('./template.html'),
